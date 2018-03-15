@@ -19,7 +19,7 @@
 #
 
 VERSION="1.9.17"
-TITLE="CloudVPS Boss Backup ${VERSION}"
+TITLE="CloudVPS Boss Manual Full Backup ${VERSION}"
 
 if [[ ! -f "/etc/cloudvps-boss/common.sh" ]]; then
     lerror "Cannot find /etc/cloudvps-boss/common.sh"
@@ -44,10 +44,10 @@ for SCRIPT in /etc/cloudvps-boss/pre-backup.d/*; do
 done
 
 echo
-lecho "Create full backup if last full backup is older than: ${FULL_IF_OLDER_THAN} and keep at max ${FULL_TO_KEEP} full backups."
+lecho "Create full backup, manually forced."
 lecho "Starting Duplicity"
 
-lecho "duplicity --verbosity 9 --log-file /var/log/duplicity.log --volsize ${VOLUME_SIZE} --tempdir=\"${TEMPDIR}\" --file-prefix=\"${HOSTNAME}.\" --name=\"${HOSTNAME}.\" --exclude-device-files --allow-source-mismatch --num-retries 100 --exclude-filelist=/etc/cloudvps-boss/exclude.conf --full-if-older-than=\"${FULL_IF_OLDER_THAN}\" ${ENCRYPTION_OPTIONS} ${CUSTOM_DUPLICITY_OPTIONS} / ${BACKUP_BACKEND}"
+lecho "duplicity full --verbosity 4 --log-file /var/log/duplicity.log --volsize ${VOLUME_SIZE} --tempdir=\"${TEMPDIR}\" --file-prefix=\"${HOSTNAME}.\" --name=\"${HOSTNAME}.\" --exclude-device-files --allow-source-mismatch --num-retries 100 --exclude-filelist=/etc/cloudvps-boss/exclude.conf --full-if-older-than=\"${FULL_IF_OLDER_THAN}\" ${ENCRYPTION_OPTIONS} ${CUSTOM_DUPLICITY_OPTIONS} / ${BACKUP_BACKEND}"
 
 OLD_IFS="${IFS}"
 IFS=$'\n'
@@ -62,9 +62,9 @@ DUPLICITY_OUTPUT=$(duplicity \
     --allow-source-mismatch \
     --num-retries 100 \
     --exclude-filelist=/etc/cloudvps-boss/exclude.conf \
-    --full-if-older-than="${FULL_IF_OLDER_THAN}" \
     ${ENCRYPTION_OPTIONS} \
     ${CUSTOM_DUPLICITY_OPTIONS} \
+    full \
     / \
     ${BACKUP_BACKEND} 2>&1 | grep -v -e Warning -e pkg_resources -e oslo -e tar -e attr -e kwargs| sed -n -e '/--------------/,/--------------/ p')
 
@@ -86,34 +86,6 @@ fi
 
 for line in ${DUPLICITY_OUTPUT}; do
         lecho "${line}"
-done
-IFS="${OLD_IFS}"
-
-echo
-lecho "CloudVPS Boss Cleanup ${VERSION} started on $(date). Removing all but ${FULL_TO_KEEP} full backups."
-lecho "duplicity --verbosity 9 --log-file /var/log/duplicity.log --file-prefix=\"${HOSTNAME}.\" --name=\"${HOSTNAME}.\" remove-all-but-n-full \"${FULL_TO_KEEP}\" ${ENCRYPTION_OPTIONS} --force  ${BACKUP_BACKEND}"
-
-OLD_IFS="${IFS}"
-IFS=$'\n'
-DUPLICITY_CLEANUP_OUTPUT=$(duplicity \
-    --verbosity 4 \
-    --log-file /var/log/duplicity.log \
-    --file-prefix="${HOSTNAME}." \
-    --name="${HOSTNAME}." \
-    remove-all-but-n-full \
-    "${FULL_TO_KEEP}" \
-    ${ENCRYPTION_OPTIONS} \
-    --force \
-    ${BACKUP_BACKEND} 2>&1 | grep -v -e Warning -e pkg_resources -e oslo -e attr -e kwargs)
-if [[ $? -ne 0 ]]; then
-    for line in ${DUPLICITY_CLEANUP_OUTPUT}; do
-            lerror ${line}
-    done
-    lerror "CloudVPS Boss Cleanup FAILED!. Please check server ${HOSTNAME}."
-fi
-
-for line in ${DUPLICITY_CLEANUP_OUTPUT}; do
-        lecho "cleanup: ${line}"
 done
 IFS="${OLD_IFS}"
 
