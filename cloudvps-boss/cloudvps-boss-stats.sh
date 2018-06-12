@@ -18,7 +18,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-VERSION="1.9.17"
+VERSION="1.9.188888888"
 TITLE="CloudVPS Boss Stats ${VERSION}"
 
 if [[ ! -f "/etc/cloudvps-boss/common.sh" ]]; then

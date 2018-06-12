@@ -19,7 +19,7 @@
 #
 
 
-VERSION="1.9.17"
+VERSION="1.9.18"
 TITLE="CloudVPS Boss MySQL Backup ${VERSION}"
 
 if [[ ! -f "/etc/cloudvps-boss/common.sh" ]]; then
@@ -183,6 +183,10 @@ if [[ -z "${DATABASES}" ]]; then
     lerror "No databases found. Not backing up MySQL"
     exit 1
 fi
+
+lecho "Cleaning up old databasebackups from /var/backups/sql/"
+rm /var/backups/sql/*.sql.gz # verwijder de oude sql backups
+
 
 for DB in ${DATABASES}; do
     lecho "Dumping database ${DB} to /var/backups/sql/${DB}.sql.gz"
