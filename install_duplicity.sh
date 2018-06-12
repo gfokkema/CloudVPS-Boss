@@ -20,7 +20,7 @@
 
 set -o pipefail
 
-VERSION="1.9.17"
+VERSION="1.9.18"
 DUPLICITY_VERSION="0.7.17"
 TITLE="CloudVPS Boss Duplicity Installer ${VERSION}"
 DL_SRV="https://download.cloudvps.com/cloudvps-boss" # no ending slash (/)

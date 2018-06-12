@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.18
+
+- Fix cleanup of old Mysql databasedumps 
+
+
 ## 1.9.17
 
 - Update Duplicity to 0.7.17

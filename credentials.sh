@@ -20,7 +20,7 @@
 
 set -o pipefail
 
-VERSION="1.9.17"
+VERSION="1.9.18"
 TITLE="CloudVPS Boss Credentials Config ${VERSION}"
 
 if [[ ${DEBUG} == "1" ]]; then
