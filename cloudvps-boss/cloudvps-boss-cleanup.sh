@@ -38,6 +38,8 @@ OLD_IFS="${IFS}"
 IFS=$'\n'
 DUPLICITY_OUTPUT=$(duplicity \
     cleanup \
+    --file-prefix="${HOSTNAME}." \
+    --name="${HOSTNAME}." \
     --extra-clean \
     --force \
     ${ENCRYPTION_OPTIONS} \
