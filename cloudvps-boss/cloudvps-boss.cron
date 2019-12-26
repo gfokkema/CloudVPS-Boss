@@ -22,5 +22,5 @@
 MAILTO="root"
 
 # CloudVPS Boss Backup
-1 1 * * * root /usr/local/bin/cloudvps-boss
+RANDM RANDH * * * root /usr/local/bin/cloudvps-boss
 
