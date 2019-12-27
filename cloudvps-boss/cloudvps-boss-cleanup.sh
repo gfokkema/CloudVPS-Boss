@@ -32,7 +32,7 @@ source /etc/cloudvps-boss/common.sh
 
 lecho "${TITLE} started on ${HOSTNAME} at $(date)."
 
-lecho "duplicity cleanup --extra-clean --force ${BACKUP_BACKEND}"
+lecho "duplicity cleanup --file-prefix="${HOSTNAME}." --name="${HOSTNAME}." --extra-clean --force ${BACKUP_BACKEND}"
 
 OLD_IFS="${IFS}"
 IFS=$'\n'
