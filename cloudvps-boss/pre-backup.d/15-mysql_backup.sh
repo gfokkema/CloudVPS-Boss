@@ -44,7 +44,7 @@ failed_mail() {
         command_exists "${COMMAND}"
     done
 
-    mail -s "[CLOUDVPS BOSS] MySQL backup failed on ${HOSTNAME}/$(curl -s http://ip.raymii.org)." "${recipient}" <<MAIL
+    mail -s "[CLOUDVPS BOSS] MySQL backup failed on ${HOSTNAME}/$(curl -s http://ip.cloudvps.nl)." "${recipient}" <<MAIL
 
 Dear user,
 
@@ -59,7 +59,7 @@ If you've corrected the credentials error and you keep receiving this message, t
 
 Your MySQL databases have not been backupped during this session.
 
-This is server $(curl -s http://ip.raymii.org). You are using CloudVPS Boss ${VERSION}
+This is server $(curl -s http://ip.cloudvps.nl). You are using CloudVPS Boss ${VERSION}
 to backup files to the CloudVPS Object Store.
 
 Kind regards,

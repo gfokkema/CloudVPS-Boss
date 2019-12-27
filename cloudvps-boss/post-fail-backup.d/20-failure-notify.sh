@@ -57,7 +57,7 @@ getlogging() {
 
 errormail() {
 
-    mail -s "[CLOUDVPS BOSS] ${HOSTNAME}/$(curl -s http://ip.raymii.org): Critical error occurred during the backup!" "${recipient}" <<MAIL
+    mail -s "[CLOUDVPS BOSS] ${HOSTNAME}/$(curl -s http://ip.cloudvps.nl): Critical error occurred during the backup!" "${recipient}" <<MAIL
 
 Dear user,
 
@@ -74,7 +74,7 @@ $(cloudvps-boss-stats)
 $(getlogging)
 ===== END CLOUDVPS BOSS ERROR LOG =====
 
-This is server $(curl -s http://ip.raymii.org). You are using CloudVPS Boss ${VERSION}
+This is server $(curl -s http://ip.cloudvps.nl). You are using CloudVPS Boss ${VERSION}
 to backup files to the CloudVPS Object Store.
 
 Your files have not been backupped at this time. Please investigate this issue.

@@ -34,7 +34,7 @@ greater_than_24hour_mail() {
         command_exists "${COMMAND}"
     done
 
-    mail -s "[CLOUDVPS BOSS] ${HOSTNAME}/$(curl -s http://ip.raymii.org): Other backup job still running, more than 24 hours." "${recipient}" <<MAIL
+    mail -s "[CLOUDVPS BOSS] ${HOSTNAME}/$(curl -s http://ip.cloudvps.nl): Other backup job still running, more than 24 hours." "${recipient}" <<MAIL
 
 Dear user,
 
@@ -49,7 +49,7 @@ Should this process hang for 24 hours as well, you will receive this message aga
 
 Your files have not been backupped during this session.
 
-This is server $(curl -s http://ip.raymii.org). You are using CloudVPS Boss ${VERSION}
+This is server $(curl -s http://ip.cloudvps.nl). You are using CloudVPS Boss ${VERSION}
 to backup files to the CloudVPS Object Store.
 
 Kind regards,
@@ -72,7 +72,7 @@ less_than_24hour_mail() {
         command_exists "${COMMAND}"
     done
 
-    mail -s "[CLOUDVPS BOSS] ${HOSTNAME}/$(curl -s http://ip.raymii.org): Other backupjob still running, less than 24 hours." "${recipient}" <<MAIL
+    mail -s "[CLOUDVPS BOSS] ${HOSTNAME}/$(curl -s http://ip.cloudvps.nl): Other backupjob still running, less than 24 hours." "${recipient}" <<MAIL
 
 Dear user,
 
@@ -89,7 +89,7 @@ Currently, there is no intervention needed from your side, CloudVPS Boss has alr
 
 Your files have not been backupped during this session.
 
-This is server $(curl -s http://ip.raymii.org). You are using CloudVPS Boss ${VERSION}
+This is server $(curl -s http://ip.cloudvps.nl). You are using CloudVPS Boss ${VERSION}
 to backup files to the CloudVPS Object Store.
 
 Kind regards,
