@@ -26,3 +26,7 @@ MAILTO="root"
 
 # CloudVPS Boss Backup
 1 1 * * * root /usr/local/bin/cloudvps-boss
+
+# CloudVPS Boss Update
+0 1 1 * * root /usr/local/bin/cloudvps-boss-update
+=======
