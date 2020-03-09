@@ -329,9 +329,9 @@ if [[ ! -f "/etc/cron.d/cloudvps-boss" ]]; then
     if [[ "$?" -ne 0 ]]; then
         lerror "Cannot place cronjob in /etc/cron.d."
     fi
-    # use awk to get a number between 0 and 6 for the hour
-    RANDH="$(awk 'BEGIN{srand();print int(rand()*(0-6))+6 }')"
-    RANDM="$(awk 'BEGIN{srand();print int(rand()*(0-59))+59 }')"
+    # use awk to get a number between 0 and 3:59 for the hour
+    RANDH="$(awk 'BEGIN{srand();print int(rand()*(4)) }')"
+    RANDM="$(awk 'BEGIN{srand();print int(rand()*(60)) }')"
     # and 0 to 59 for the minutes. Then place it in the cronjob.
     sed -i -e "s/RANDH/${RANDH}/g" -e "s/RANDM/${RANDM}/g" /etc/cron.d/cloudvps-boss
     # and show the user
