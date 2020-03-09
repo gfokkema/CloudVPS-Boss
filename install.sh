@@ -342,7 +342,7 @@ if [[ ! -d "/usr/local/bin" ]]; then
     mkdir -p "/usr/local/bin"
 fi
 
-for COMMAND in "cloudvps-boss.sh" "cloudvps-boss-restore.sh" "cloudvps-boss-stats.sh" "cloudvps-boss-update.sh" "cloudvps-boss-list-current-files.sh" "cloudvps-boss-manual-full.sh"; do
+for COMMAND in "cloudvps-boss.sh" "cloudvps-boss-cleanup.sh" "cloudvps-boss-restore.sh" "cloudvps-boss-stats.sh" "cloudvps-boss-update.sh" "cloudvps-boss-list-current-files.sh" "cloudvps-boss-manual-full.sh"; do
     log "Creating symlink for /etc/cloudvps-boss/${COMMAND} in /usr/local/bin/${COMMAND%.sh}."
     chmod +x "/etc/cloudvps-boss/${COMMAND}"
     ln -fs "/etc/cloudvps-boss/${COMMAND}" "/usr/local/bin/${COMMAND%.sh}"
